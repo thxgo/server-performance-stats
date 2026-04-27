@@ -32,17 +32,16 @@ echo "Memoria usada: ${MEM_USED} MB (${MEM_USEDPERC})"
 echo "Memoria livre: ${MEM_FREE} MB (${MEM_FREEPERC})"
 
 echo -e "\n\nStatus do disco do sistema:"
-# resultado esta saindo errado, nao tenho 2tb de armazenamento
 # remover redundancia usando read TOTAL USED <<< df  etc.. mesma coisa pro MEM
 STR_TOTAL=$(df -h / | awk 'NR==2 {print $2}')
-STR_USED=$(df -h --total | awk '/total/ {print $3}')
-STR_USEDPERC=$(df -h --total | awk '/total/ {print $5}')
-STR_FREE=$(df -h --total | awk '/total/ {print $4}')
-STR_FREEPERC=$(df -h --total | awk '/total/ {printf 100 - $5}')
+STR_USED=$(df -h / | awk 'NR==2 {print $3}') 
+STR_USEDPERC=$(df -h / | awk 'NR==2 {print $5}')
+STR_FREE=$(df -h / | awk 'NR==2 {print $4}')
+STR_FREEPERC=$(df -h / | awk 'NR==2 {printf 100 - $5 "%"}')
 
 echo "Armazenamento total: ${STR_TOTAL}B"
 echo "Armazenamento usado: ${STR_USED}B (${STR_USEDPERC})"
-echo -e "Armazenamento livre: ${STR_FREE}B (${STR_FREEPERC}%)"
+echo -e "Armazenamento livre: ${STR_FREE}B (${STR_FREEPERC})"
 
 echo -e "\n\nProcessos com maior uso de RAM:"
 
