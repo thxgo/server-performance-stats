@@ -37,7 +37,7 @@ STR_TOTAL=$(df -h / | awk 'NR==2 {print $2}')
 STR_USED=$(df -h / | awk 'NR==2 {print $3}') 
 STR_USEDPERC=$(df -h / | awk 'NR==2 {print $5}')
 STR_FREE=$(df -h / | awk 'NR==2 {print $4}')
-STR_FREEPERC=$(df -h / | awk 'NR==2 {printf 100 - $5 "%"}')
+STR_FREEPERC=$(df -h / | awk 'NR==2 {gsub("%", "", $5); printf "%.0f%%\n", 100 - $5}')
 
 echo "Armazenamento total: ${STR_TOTAL}B"
 echo "Armazenamento usado: ${STR_USED}B (${STR_USEDPERC})"
