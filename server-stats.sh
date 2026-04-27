@@ -1,11 +1,10 @@
 #!/bin/bash
 
+echo "Informações do sistema:"
 
-echo -e "Informações do sistema:"
+OS_VERSION=$(grep PRETTY_NAME /etc/os-release | cut -d'"' -f2)
 
-OS_VERSION=$(lsb_release -a | awk '/Description:/ {print $2, $3, $4}')
-
-echo -e "Versão do Sistema Operacional: ${OS_VERSION}"
+echo "Versão do Sistema Operacional: ${OS_VERSION}"
 
 echo -e "\nUptime:"
 
