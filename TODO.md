@@ -1,17 +1,18 @@
-# TODO (a ser feito)
+# TODO
 
 ## Bugs
+- [ ] `lsb_release` compatibility with other distros is not guaranteed
 
-- [ ] Compatibilidade do comando lsb_release com outras distros não é garantida. 
-- [ ] Tamanho do disco rígido disponível e usado está sendo duplicado.
-
-## Melhorias
-
-- [ ] Adicionar README.md
-- [ ] Definir a estrutura dos outros comandos da seção de disco rígido da mesma forma que o do disco total (df -h --total > df -h /)  
-- [ ] Reduzir repetição dos comandos free e df, usar outra forma para ler as variáveis 
-- [ ] Remover redundância das demais partes
+## Improvements
+- [ ] Add README.md
+- [ ] Reduce repetition of `free` and `df` calls using a different variable reading approach
+- [ ] Remove redundancy in remaining sections
 
 ## Features
+- [ ] Add logged users and login failures
 
-- [ ] Adicionar usuários logados e falhas de login
+---
+
+## Done
+- [x] Fix available and used disk size being doubled
+- [x] Standardize disk section commands using `df -h /` instead of `df -h --total`
