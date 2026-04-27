@@ -24,8 +24,8 @@ echo -e "\nStatus da memória do sistema:"
 MEM_TOTAL=$(free -m | awk '/Mem:/ {print $2}')
 MEM_USED=$(free -m | awk '/Mem:/ {print $3}')
 MEM_USEDPERC=$(free -m | awk '/Mem:/ {printf "%.2f%%\n", $3/$2 * 100}')
-MEM_FREE=$(free -m | awk '/Mem:/ {print $3}')
-MEM_FREEPERC=$(free -m | awk '/Mem:/ {printf "%.2f%%\n", 100 - $3/$2 * 100'})
+MEM_FREE=$(free -m | awk '/Mem:/ {print $4}')
+MEM_FREEPERC=$(free -m | awk '/Mem:/ {printf "%.2f%%\n", 100 - $3/$2 * 100}')
 
 echo "Memoria total: ${MEM_TOTAL} MB"
 echo "Memoria usada: ${MEM_USED} MB (${MEM_USEDPERC})"
