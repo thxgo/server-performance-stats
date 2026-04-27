@@ -3,8 +3,10 @@
 echo "Informações do sistema:"
 
 OS_VERSION=$(grep PRETTY_NAME /etc/os-release | cut -d'"' -f2)
+KERNEL_VERSION=$(uname -r)
 
 echo "Versão do Sistema Operacional: ${OS_VERSION}"
+echo "Versão do Kernel: ${KERNEL_VERSION}"
 
 echo -e "\nUptime:"
 
