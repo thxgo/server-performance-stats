@@ -22,23 +22,18 @@ echo "Uso do CPU: ${CPU_STATS}"
 
 echo -e "\nStatus da memória do sistema:"
 
-MEM_TOTAL=$(free -m | awk '/Mem:/ {print $2}')
-MEM_USED=$(free -m | awk '/Mem:/ {print $3}')
-MEM_USEDPERC=$(free -m | awk '/Mem:/ {printf "%.2f%%\n", $3/$2 * 100}')
-MEM_FREE=$(free -m | awk '/Mem:/ {print $4}')
-MEM_FREEPERC=$(free -m | awk '/Mem:/ {printf "%.2f%%\n", 100 - $3/$2 * 100}')
+read MEM_TOTAL MEM_USED MEM_FREE <<< $(free -m | awk '/Mem:/ {print $2, $3, $4}')
+MEM_USEDPERC=$(awk "BEGIN {printf \"%.2f%%\", $MEM_USED/$MEM_TOTAL * 100}")
+MEM_FREEPERC=$(awk "BEGIN {printf \"%.2f%%\", 100 - $MEM_USED/$MEM_TOTAL * 100}")
 
 echo "Memoria total: ${MEM_TOTAL} MB"
 echo "Memoria usada: ${MEM_USED} MB (${MEM_USEDPERC})"
 echo "Memoria livre: ${MEM_FREE} MB (${MEM_FREEPERC})"
 
 echo -e "\n\nStatus do disco do sistema:"
-# remover redundancia usando read TOTAL USED <<< df  etc.. mesma coisa pro MEM
-STR_TOTAL=$(df -h / | awk 'NR==2 {print $2}')
-STR_USED=$(df -h / | awk 'NR==2 {print $3}') 
-STR_USEDPERC=$(df -h / | awk 'NR==2 {print $5}')
-STR_FREE=$(df -h / | awk 'NR==2 {print $4}')
-STR_FREEPERC=$(df -h / | awk 'NR==2 {gsub("%", "", $5); printf "%.0f%%\n", 100 - $5}')
+
+read STR_TOTAL STR_USED STR_FREE STR_USEDPERC <<< $(df -h / | awk 'NR==2 {print $2, $3, $4, $5}')
+STR_FREEPERC=$(awk "BEGIN {printf \"%.0f%%\", 100 - ${STR_USEDPERC%\%}}")
 
 echo "Armazenamento total: ${STR_TOTAL}B"
 echo "Armazenamento usado: ${STR_USED}B (${STR_USEDPERC})"
