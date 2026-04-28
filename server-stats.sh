@@ -8,11 +8,11 @@ KERNEL_VERSION=$(uname -r)
 echo "Versão do Sistema Operacional: ${OS_VERSION}"
 echo "Versão do Kernel: ${KERNEL_VERSION}"
 
-echo -e "\nUptime:"
-
 UPTIME=$(uptime -p | sed 's/up //')
+USERS_LOGGED_IN=$(who)
 
-echo "Tempo de atividade do sistema: $UPTIME"
+echo -e  "\nTempo de atividade do sistema: $UPTIME"
+echo -e "Usuários logados:\n${USERS_LOGGED_IN}" 
 
 echo -e "\nStatus do CPU do sistema:"
 
